@@ -16,8 +16,13 @@ class DefaultController extends Controller
      */
     public function actionIndex($id)
     {
+        $model = Article::findOne((int)$id);
+        if(is_null($model)) {
+            return $this->goHome();
+        }
+
         return $this->render('index', [
-            'model' => Article::findOne($id),
+            'model' => $model,
         ]);
     }
 }
